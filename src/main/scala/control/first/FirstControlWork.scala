@@ -14,11 +14,11 @@ object FirstControlWork {
     val sc = new SparkContext(conf)
     sc.setLogLevel("ERROR")
     val rDDFile = sc.textFile("data/superhero.csv")
-    val objRDD = rDDFile.map(str => Hero.fromString(str))
-    println("First:")
+    val objRDD = rDDFile.map(str => str.split(";")).map(obj=>(obj(1), obj(2) toInt)).reduceByKey(_+_).foreach(res => println(res._1 + " : " + res._2))
+    /*println("First:")
     objRDD.map(obj => (obj.name, 1)).reduceByKey(_ + _).foreach(res => println(res._1 + " : " + res._2))
     println("Killed Enemyes:")
-    objRDD.map(obj => (obj.name, obj.killedEnemies)).reduceByKey(_ + _).foreach(res => println(res._1 + " : " + res._2))
+    objRDD.map(obj => (obj.name, obj.killedEnemies)).reduceByKey(_ + _).foreach(res => println(res._1 + " : " + res._2))*/
 
   }
 }
