@@ -113,11 +113,11 @@ object MovieRecomendationSystem {
       r=> Movie(r.getInt(1), "", r.getFloat(2)))
       .toDF
     myMovies.coalesce(1)
-      .write
+      /*.writeass
       .option("header", "true")
-      .csv("file:///out.csv")
-      /*.write.format("com.databricks.spark.csv")
-      .save("sample.csv")*/
+      .csv("file:///out.csv")*/
+      .write.format("com.databricks.spark.csv")
+      .save("sample.csv")
     //    myMovies.show(100)
   }
 
